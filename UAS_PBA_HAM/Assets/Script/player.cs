@@ -4,45 +4,49 @@ using UnityEngine;
 
 public class player : MonoBehaviour
 {
-    float laju = 5.0f;
-    float putar = 60.0f;
-    public float speed = 10.0f;
+    //untuk player gerak
+    public float rotate;
+    public float speed;
+
+    //untuk batas terrain
+    public Terrain terrain;  
+    private Vector3 minBounds;
+    private Vector3 maxBounds;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        #region Batas Terrain
+        // Get the terrain's position and size
+        TerrainCollider terrainCollider = terrain.GetComponent<TerrainCollider>();
+        minBounds = terrain.transform.position; // Position of terrain's bottom-left corner
+        maxBounds = minBounds + new Vector3(terrain.terrainData.size.x, 0, terrain.terrainData.size.z);  // Top-right corner
+        #endregion
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W)) //This controls forward
-        {
-            GetComponent<Rigidbody>().transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        }
+        #region Player Control
+        float horizontal = Input.GetAxis("Horizontal");
+        transform.Rotate(transform.up * horizontal * rotate * Time.deltaTime);
 
-        if (Input.GetKey(KeyCode.A)) //This controls left
-        {
-            GetComponent<Rigidbody>().transform.Translate(Vector3.left * Time.deltaTime * speed);
-        }
+        float vertical = Input.GetAxis("Vertical");
+        transform.position += transform.forward * vertical * speed * Time.deltaTime;
+        #endregion
 
-        if (Input.GetKey(KeyCode.S))//This controls back
-        {
-            GetComponent<Rigidbody>().transform.Translate(Vector3.back * Time.deltaTime * speed);
-        }
+        #region Batas Terrain
+        // Get the current position of the player
+        Vector3 playerPosition = transform.position;
 
-        if (Input.GetKey(KeyCode.D))//This controls right
-        {
-            GetComponent<Rigidbody>().transform.Translate(Vector3.right * Time.deltaTime * speed);
-        }
+        // Clamp the player's position within the terrain bounds
+        playerPosition.x = Mathf.Clamp(playerPosition.x, minBounds.x, maxBounds.x);
+        playerPosition.z = Mathf.Clamp(playerPosition.z, minBounds.z, maxBounds.z);
 
-        //putar kiri - kanan
-        float hor = Input.GetAxis("Horizontal") * putar * Time.deltaTime;
-        transform.Rotate(0, hor, 0);
-
-        //putar maju - mundur
-        float ver = Input.GetAxis("Vertical") * laju * Time.deltaTime;
-        transform.Translate(0, 0, ver);
+        // Update the player's position
+        transform.position = playerPosition;
+        #endregion 
 
     }
 }
