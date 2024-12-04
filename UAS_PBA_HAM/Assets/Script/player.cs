@@ -7,6 +7,8 @@ public class player : MonoBehaviour
     //untuk player gerak
     public float rotate;
     public float speed;
+    private Rigidbody rb;
+    public bool sentuhTanah = true;
 
     //untuk batas terrain
     public Terrain terrain;  
@@ -16,6 +18,8 @@ public class player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+
         #region Batas Terrain
         // Get the terrain's position and size
         TerrainCollider terrainCollider = terrain.GetComponent<TerrainCollider>();
@@ -34,6 +38,12 @@ public class player : MonoBehaviour
 
         float vertical = Input.GetAxis("Vertical");
         transform.position += transform.forward * vertical * speed * Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space) && sentuhTanah)
+        {
+            rb.AddForce(new Vector3(0, 20, 0), ForceMode.Impulse);
+            sentuhTanah = false;
+        }
         #endregion
 
         #region Batas Terrain
@@ -49,4 +59,15 @@ public class player : MonoBehaviour
         #endregion 
 
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        #region lompat
+        if (collision.gameObject.tag == "Ground")
+        {
+            sentuhTanah = true;
+        }
+        #endregion
+    }
+
 }
