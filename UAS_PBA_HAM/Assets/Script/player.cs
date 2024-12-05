@@ -14,6 +14,7 @@ public class player : MonoBehaviour
     public Terrain terrain;  
     private Vector3 minBounds;
     private Vector3 maxBounds;
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -33,11 +34,14 @@ public class player : MonoBehaviour
     void Update()
     {
         #region Player Control
+        rb.AddForce(new Vector3(), ForceMode.Impulse);
+
         float horizontal = Input.GetAxis("Horizontal");
         transform.Rotate(transform.up * horizontal * rotate * Time.deltaTime);
 
         float vertical = Input.GetAxis("Vertical");
-        transform.position += transform.forward * vertical * speed * Time.deltaTime;
+        Vector3 force = transform.forward * vertical * speed;
+        rb.AddForce(force, ForceMode.Impulse);
 
         if (Input.GetKeyDown(KeyCode.Space) && sentuhTanah)
         {
