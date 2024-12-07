@@ -61,20 +61,24 @@ public class player : MonoBehaviour
             sentuhTanah = false;
         }
 
-        // Speed check to trigger particles
-        float currentSpeed = rb.velocity.magnitude;  // Calculate the player's speed
+        if (speedParticles != null)
+        {
+            // Speed check to trigger particles
+            float currentSpeed = rb.velocity.magnitude;  // Calculate the player's speed
 
-        if (currentSpeed >= 5f && !isParticlePlaying)
-        {
-            // Play particle effect when speed reaches 5
-            speedParticles.Play();
-            isParticlePlaying = true;  // To prevent it from playing again
-        }
-        else if (currentSpeed < 5f && isParticlePlaying)
-        {
-            // Stop particle effect when speed is below 5
-            speedParticles.Stop();
-            isParticlePlaying = false;  // Reset particle state
+            if (currentSpeed >= 5f && !isParticlePlaying)
+            {
+                // Play particle effect when speed reaches 5
+                speedParticles.Play();
+                isParticlePlaying = true;  // To prevent it from playing again
+            }
+            else if (currentSpeed < 5f && isParticlePlaying)
+            {
+                // Stop particle effect when speed is below 5
+                speedParticles.Stop();
+                isParticlePlaying = false;  // Reset particle state
+            }
+
         }
 
         #endregion
