@@ -1,14 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class player : MonoBehaviour
 {
     //untuk player gerak
-    public float rotate;
-    public float speed;
+    //public Vector3 gerak;
     private Rigidbody rb;
+    public float speed;
+    public float rotate;
     public bool sentuhTanah = true;
+
+    // Particle system reference
+    public ParticleSystem speedParticles;  // Drag and drop your particle system here in the inspector
+    private bool isParticlePlaying = false;
 
     //untuk batas terrain
     public Terrain terrain;  
@@ -33,21 +40,43 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        #region Player Control
-        rb.AddForce(new Vector3(), ForceMode.Impulse);
 
+        #region Player Control
+        if (Input.GetKey(KeyCode.W)) //This controls forward
+        {
+            rb.AddForce(transform.forward * speed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.S))//This controls back
+        {
+            rb.AddForce(-transform.forward * speed * Time.deltaTime);
+        }
+        
         float horizontal = Input.GetAxis("Horizontal");
         transform.Rotate(transform.up * horizontal * rotate * Time.deltaTime);
 
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 force = transform.forward * vertical * speed;
-        rb.AddForce(force, ForceMode.Impulse);
-
+        
         if (Input.GetKeyDown(KeyCode.Space) && sentuhTanah)
         {
-            rb.AddForce(new Vector3(0, 20, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(0, 10, 0), ForceMode.Impulse);
             sentuhTanah = false;
         }
+
+        // Speed check to trigger particles
+        float currentSpeed = rb.velocity.magnitude;  // Calculate the player's speed
+
+        if (currentSpeed >= 5f && !isParticlePlaying)
+        {
+            // Play particle effect when speed reaches 5
+            speedParticles.Play();
+            isParticlePlaying = true;  // To prevent it from playing again
+        }
+        else if (currentSpeed < 5f && isParticlePlaying)
+        {
+            // Stop particle effect when speed is below 5
+            speedParticles.Stop();
+            isParticlePlaying = false;  // Reset particle state
+        }
+
         #endregion
 
         #region Batas Terrain
@@ -74,4 +103,8 @@ public class player : MonoBehaviour
         #endregion
     }
 
+    private void FixedUpdate()
+    {
+
+    }
 }
