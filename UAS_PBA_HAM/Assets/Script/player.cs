@@ -11,7 +11,13 @@ public class player : MonoBehaviour
     private Rigidbody rb;
     public float speed;
     public float rotate;
+    public float jumpForce;
+
     public bool sentuhTanah = true;
+    Vector3 moveDirection;
+    float verticalInput;
+    float horizontalInput;
+
 
     // Particle system reference
     public ParticleSystem speedParticles;  // Drag and drop your particle system here in the inspector
@@ -40,26 +46,10 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         #region Player Control
-        if (Input.GetKey(KeyCode.W)) //This controls forward
-        {
-            rb.AddForce(transform.forward * speed * Time.deltaTime);
-        }
-        if (Input.GetKey(KeyCode.S))//This controls back
-        {
-            rb.AddForce(-transform.forward * speed * Time.deltaTime);
-        }
-        
-        float horizontal = Input.GetAxis("Horizontal");
-        transform.Rotate(transform.up * horizontal * rotate * Time.deltaTime);
+        MyInput();
+        SpeedControl();
 
-        
-        if (Input.GetKeyDown(KeyCode.Space) && sentuhTanah)
-        {
-            rb.AddForce(new Vector3(0, 10, 0), ForceMode.Impulse);
-            sentuhTanah = false;
-        }
 
         if (speedParticles != null)
         {
@@ -81,6 +71,7 @@ public class player : MonoBehaviour
 
         }
 
+        
         #endregion
 
         #region Batas Terrain
@@ -109,6 +100,50 @@ public class player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        MovePlayer();
+    }
 
+
+    private void MyInput()
+    {
+        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("Horizontal");
+        if (Input.GetKeyDown(KeyCode.Space) && sentuhTanah)
+        {
+            Jump();
+        }
+    }
+    private void MovePlayer()
+    {
+        moveDirection = transform.forward * verticalInput;
+        if (sentuhTanah)
+        {
+            rb.AddForce(moveDirection.normalized * speed, ForceMode.Impulse);
+        }
+        else if (!sentuhTanah)
+        {
+            rb.AddForce(moveDirection.normalized * speed * 0.4f, ForceMode.Impulse);
+
+        }
+        transform.Rotate(transform.up * horizontalInput * rotate);
+
+    }
+
+    private void SpeedControl()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        if (flatVel.magnitude > speed)
+        {
+            Vector3 limitedVel = flatVel.normalized * speed;
+            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.AddForce(transform.up * jumpForce , ForceMode.Impulse);
+        sentuhTanah = false;
     }
 }
