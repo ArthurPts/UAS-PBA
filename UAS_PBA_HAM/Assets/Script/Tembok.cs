@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Tembok : MonoBehaviour
 {
-    public float minSpeed;
+    public player dataPenabrak;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,21 +21,28 @@ public class Tembok : MonoBehaviour
 
     private void OnCollisionEnter(Collision penabrak)
     {
-        if (penabrak.gameObject.tag != "Ground") {
+        if (penabrak.gameObject.tag == "Player") 
+        {
             Rigidbody rb = penabrak.rigidbody;
-
-            Debug.Log("Collision detected with: " + rb.velocity.magnitude);
-            if (rb != null)
+                Debug.Log("Collision detected with: " + rb.velocity.magnitude);
+            if (dataPenabrak.isParticlePlaying == true)
             {
-                // Periksa kecepatan objek
-                float speed = rb.velocity.magnitude;
-
-                if (speed >= minSpeed)
-                {
-                    // Hancurkan objek ini
-                    Destroy(gameObject);
-                }
+                dataPenabrak.speedParticles.Stop();
+                dataPenabrak.isParticlePlaying = false;
+                Destroy(gameObject);
             }
+
+            //if (rb != null)
+            //{
+            //    // Periksa kecepatan objek
+            //    float speed = rb.velocity.magnitude;
+
+            //    if (speed >= minSpeed)
+            //    {
+            //        // Hancurkan objek ini
+            //        Destroy(gameObject);
+            //    }
+            //}
         }
     }
 

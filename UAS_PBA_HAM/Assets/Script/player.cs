@@ -21,7 +21,7 @@ public class player : MonoBehaviour
 
     // Particle system reference
     public ParticleSystem speedParticles;  // Drag and drop your particle system here in the inspector
-    private bool isParticlePlaying = false;
+    public bool isParticlePlaying;
 
     //untuk batas terrain
     public Terrain terrain;  
@@ -51,25 +51,7 @@ public class player : MonoBehaviour
         SpeedControl();
 
 
-        if (speedParticles != null)
-        {
-            // Speed check to trigger particles
-            float currentSpeed = rb.velocity.magnitude;  // Calculate the player's speed
-
-            if (currentSpeed >= 5f && !isParticlePlaying)
-            {
-                // Play particle effect when speed reaches 5
-                speedParticles.Play();
-                isParticlePlaying = true;  // To prevent it from playing again
-            }
-            else if (currentSpeed < 5f && isParticlePlaying)
-            {
-                // Stop particle effect when speed is below 5
-                speedParticles.Stop();
-                isParticlePlaying = false;  // Reset particle state
-            }
-
-        }
+        
 
         
         #endregion
@@ -95,6 +77,13 @@ public class player : MonoBehaviour
         {
             sentuhTanah = true;
         }
+
+        if (collision.gameObject.tag == "Buff")
+        {
+            speedParticles.Play();
+            isParticlePlaying = true;
+        }
+
         #endregion
     }
 
@@ -113,6 +102,7 @@ public class player : MonoBehaviour
             Jump();
         }
     }
+
     private void MovePlayer()
     {
         moveDirection = transform.forward * verticalInput;
