@@ -17,10 +17,16 @@ public class player : MonoBehaviour
     Vector3 moveDirection;
     float verticalInput;
     float horizontalInput;
+    public float forceMagnitude;
+
 
 
     // Particle system reference
-    public ParticleSystem speedParticles;  // Drag and drop your particle system here in the inspector
+    public ParticleSystem ParticlesPower;  // Drag and drop your particle system here in the inspector
+    public ParticleSystem ParticlesBuff1;
+    public ParticleSystem ParticlesBuff2;
+    public ParticleSystem ParticlesBuff3;
+
     public bool isParticlePlaying;
 
     //untuk batas terrain
@@ -49,11 +55,6 @@ public class player : MonoBehaviour
         #region Player Control
         MyInput();
         SpeedControl();
-
-
-        
-
-        
         #endregion
 
         #region Batas Terrain
@@ -80,12 +81,65 @@ public class player : MonoBehaviour
 
         if (collision.gameObject.tag == "Buff")
         {
-            speedParticles.Play();
+            ParticlesPower.Play();
             isParticlePlaying = true;
+        }
+        else if (collision.gameObject.tag == "BuffPush1")
+        {
+            ParticlesBuff2.Stop();
+            ParticlesBuff3.Stop();
+
+            ParticlesBuff1.Play();
+            isParticlePlaying = true;
+            forceMagnitude = 150f;
+
+        }
+        else if (collision.gameObject.tag == "BuffPush2")
+        {
+            ParticlesBuff1.Stop();
+            ParticlesBuff3.Stop();
+
+            ParticlesBuff2.Play();
+            isParticlePlaying = true;
+            forceMagnitude = 100f;
+
+        }
+        else if (collision.gameObject.tag == "BuffPush3")
+        {
+            ParticlesBuff1.Stop();
+            ParticlesBuff2.Stop();
+
+            ParticlesBuff3.Play();
+            isParticlePlaying = true;
+            forceMagnitude = 75f;
+
+        }
+        Rigidbody rb = collision.collider.attachedRigidbody;
+
+        if (rb != null)
+        {
+            Vector3 forceDirect = collision.gameObject.transform.position - transform.position;
+            forceDirect.y = 0;
+            forceDirect.Normalize();
+
+            rb.AddForceAtPosition(forceDirect * forceMagnitude, transform.position, ForceMode.Impulse);
         }
 
         #endregion
     }
+    //private void OnCollisionStay(Collision hit)
+    //{
+    //    Rigidbody rb = hit.collider.attachedRigidbody;
+
+    //    if (rb != null)
+    //    {
+    //        Vector3 forceDirect = hit.gameObject.transform.position - transform.position;
+    //        forceDirect.y = 0;
+    //        forceDirect.Normalize();
+
+    //        rb.AddForceAtPosition(forceDirect * forceMagnitude, transform.position, ForceMode.Impulse);
+    //    }
+    //}
 
     private void FixedUpdate()
     {

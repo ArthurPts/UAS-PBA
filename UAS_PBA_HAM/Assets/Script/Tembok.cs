@@ -27,22 +27,15 @@ public class Tembok : MonoBehaviour
                 Debug.Log("Collision detected with: " + rb.velocity.magnitude);
             if (dataPenabrak.isParticlePlaying == true)
             {
-                dataPenabrak.speedParticles.Stop();
+                dataPenabrak.ParticlesPower.Stop();
                 dataPenabrak.isParticlePlaying = false;
                 Destroy(gameObject);
             }
 
-            //if (rb != null)
-            //{
-            //    // Periksa kecepatan objek
-            //    float speed = rb.velocity.magnitude;
-
-            //    if (speed >= minSpeed)
-            //    {
-            //        // Hancurkan objek ini
-            //        Destroy(gameObject);
-            //    }
-            //}
+        }
+        else if (penabrak.gameObject.tag == "Break")
+        {
+            Destroy(gameObject);
         }
     }
 

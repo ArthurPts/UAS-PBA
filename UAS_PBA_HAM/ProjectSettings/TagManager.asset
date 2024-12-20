@@ -7,6 +7,10 @@ TagManager:
   - Ground
   - Wall
   - Buff
+  - BuffPush1
+  - BuffPush2
+  - BuffPush3
+  - Break
   layers:
   - Default
   - TransparentFX
