@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 92554689}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -472,10 +472,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9bda7a3b6e0a44393db933b553ed75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 900
-  rotate: 70
+  speed: 1.5
+  rotate: 2
+  jumpForce: 5
   sentuhTanah: 1
-  speedParticles: {fileID: 0}
+  forceMagnitude: 0
+  ParticlesPower: {fileID: 0}
+  ParticlesBuff1: {fileID: 0}
+  ParticlesBuff2: {fileID: 0}
+  ParticlesBuff3: {fileID: 0}
+  isParticlePlaying: 0
   terrain: {fileID: 1903468251}
 --- !u!1 &1903468249
 GameObject:
@@ -490,7 +496,7 @@ GameObject:
   - component: {fileID: 1903468250}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

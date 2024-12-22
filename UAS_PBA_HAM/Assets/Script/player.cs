@@ -114,15 +114,20 @@ public class player : MonoBehaviour
             forceMagnitude = 75f;
 
         }
-        Rigidbody rb = collision.collider.attachedRigidbody;
 
-        if (rb != null)
+        if (collision.gameObject.tag != "Wall")
         {
-            Vector3 forceDirect = collision.gameObject.transform.position - transform.position;
-            forceDirect.y = 0;
-            forceDirect.Normalize();
+            Rigidbody rb = collision.collider.attachedRigidbody;
 
-            rb.AddForceAtPosition(forceDirect * forceMagnitude, transform.position, ForceMode.Impulse);
+            if (rb != null)
+            {
+                Vector3 forceDirect = collision.gameObject.transform.position - transform.position;
+                forceDirect.y = 0;
+                forceDirect.Normalize();
+
+                rb.AddForceAtPosition(forceDirect * forceMagnitude, transform.position, ForceMode.Impulse);
+            }
+
         }
 
         #endregion

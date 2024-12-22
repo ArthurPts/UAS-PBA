@@ -30,7 +30,13 @@ public class bola : MonoBehaviour
             dataPenabrak.ParticlesBuff2.Stop();
             dataPenabrak.ParticlesBuff3.Stop();
             dataPenabrak.isParticlePlaying = false;
-            
+        }
+        else if(collision.gameObject.tag == "Wall")
+        {
+            Destroy(this.gameObject);
+        }
+        else if (collision.gameObject.tag == "Finish")
+        {
 
         }
     }
