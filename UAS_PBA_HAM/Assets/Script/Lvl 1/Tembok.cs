@@ -6,7 +6,6 @@ public class Tembok : MonoBehaviour
 {
     public player dataPenabrak;
 
-
     // Start is called before the first frame update
     void Start()
     {

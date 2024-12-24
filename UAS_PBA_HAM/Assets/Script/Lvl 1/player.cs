@@ -132,20 +132,7 @@ public class player : MonoBehaviour
 
         #endregion
     }
-    //private void OnCollisionStay(Collision hit)
-    //{
-    //    Rigidbody rb = hit.collider.attachedRigidbody;
-
-    //    if (rb != null)
-    //    {
-    //        Vector3 forceDirect = hit.gameObject.transform.position - transform.position;
-    //        forceDirect.y = 0;
-    //        forceDirect.Normalize();
-
-    //        rb.AddForceAtPosition(forceDirect * forceMagnitude, transform.position, ForceMode.Impulse);
-    //    }
-    //}
-
+   
     private void FixedUpdate()
     {
         MovePlayer();

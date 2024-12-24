@@ -35,10 +35,7 @@ public class bola : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        else if (collision.gameObject.tag == "Finish")
-        {
-
-        }
+        
     }
 
 
