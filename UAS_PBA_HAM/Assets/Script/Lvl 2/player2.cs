@@ -21,13 +21,13 @@ public class player2 : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
         MyInput();
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -35,6 +35,11 @@ public class player2 : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             sentuhTanah = true;
+        }
+        else if (collision.gameObject.tag == "Respawn")
+        {
+            GameObject newPlayer = Instantiate(gameObject,new Vector3(47,1,6),Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 
@@ -59,11 +64,11 @@ public class player2 : MonoBehaviour
         moveDirection = transform.forward * verticalInput;
         if (sentuhTanah)
         {
-            rb.AddForce(moveDirection.normalized * speed, ForceMode.Impulse);
+            rb.AddForce(moveDirection.normalized * speed, ForceMode.VelocityChange);
         }   
         else if (!sentuhTanah)
         {
-            rb.AddForce(moveDirection.normalized * speed * 0.4f, ForceMode.Impulse);
+            rb.AddForce(moveDirection.normalized * speed * 0.4f, ForceMode.VelocityChange);
 
         }
         transform.Rotate(transform.up * horizontalInput * rotate);

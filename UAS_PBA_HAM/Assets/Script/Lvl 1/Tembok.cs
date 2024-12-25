@@ -20,7 +20,7 @@ public class Tembok : MonoBehaviour
 
     private void OnCollisionEnter(Collision penabrak)
     {
-        if (penabrak.gameObject.tag == "Player") 
+        if (penabrak.gameObject.tag == "Player" && dataPenabrak != null) 
         {
             Rigidbody rb = penabrak.rigidbody;
                 Debug.Log("Collision detected with: " + rb.velocity.magnitude);
