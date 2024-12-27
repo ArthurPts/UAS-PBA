@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 public class player : MonoBehaviour
 {
     //untuk player gerak
-    //public Vector3 gerak;
     private Rigidbody rb;
     public float speed;
     public float rotate;
@@ -19,66 +18,36 @@ public class player : MonoBehaviour
     float horizontalInput;
     public float forceMagnitude;
 
-
-
     // Particle system reference
-    public ParticleSystem ParticlesPower;  // Drag and drop your particle system here in the inspector
+    public ParticleSystem ParticlesPower;
     public ParticleSystem ParticlesBuff1;
     public ParticleSystem ParticlesBuff2;
     public ParticleSystem ParticlesBuff3;
-
     public bool isParticlePlaying;
-
-    //untuk batas terrain
-    public Terrain terrain;  
-    private Vector3 minBounds;
-    private Vector3 maxBounds;
- 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
-        #region Batas Terrain
-        // Get the terrain's position and size
-        TerrainCollider terrainCollider = terrain.GetComponent<TerrainCollider>();
-        minBounds = terrain.transform.position; // Position of terrain's bottom-left corner
-        maxBounds = minBounds + new Vector3(terrain.terrainData.size.x, 0, terrain.terrainData.size.z);  // Top-right corner
-        #endregion
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        #region Player Control
         MyInput();
         SpeedControl();
-        #endregion
-
-        #region Batas Terrain
-        // Get the current position of the player
-        Vector3 playerPosition = transform.position;
-
-        // Clamp the player's position within the terrain bounds
-        playerPosition.x = Mathf.Clamp(playerPosition.x, minBounds.x, maxBounds.x);
-        playerPosition.z = Mathf.Clamp(playerPosition.z, minBounds.z, maxBounds.z);
-
-        // Update the player's position
-        transform.position = playerPosition;
-        #endregion 
-
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        #region lompat
+        //lompat
         if (collision.gameObject.tag == "Ground")
         {
             sentuhTanah = true;
         }
 
+        //buff
         if (collision.gameObject.tag == "Buff")
         {
             ParticlesPower.Play();
@@ -115,6 +84,7 @@ public class player : MonoBehaviour
 
         }
 
+        //untuk rintangan 2
         if (collision.gameObject.tag != "Wall")
         {
             Rigidbody rb = collision.collider.attachedRigidbody;
@@ -129,8 +99,6 @@ public class player : MonoBehaviour
             }
 
         }
-
-        #endregion
     }
    
     private void FixedUpdate()
@@ -143,6 +111,7 @@ public class player : MonoBehaviour
     {
         verticalInput = Input.GetAxis("Vertical");
         horizontalInput = Input.GetAxis("Horizontal");
+
         if (Input.GetKeyDown(KeyCode.Space) && sentuhTanah)
         {
             Jump();
@@ -167,12 +136,12 @@ public class player : MonoBehaviour
 
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        Vector3 kecepatanNow = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        if (flatVel.magnitude > speed)
+        if (kecepatanNow.magnitude > speed)
         {
-            Vector3 limitedVel = flatVel.normalized * speed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+            Vector3 setMaksimal = kecepatanNow.normalized * speed;
+            rb.velocity = new Vector3(setMaksimal.x, rb.velocity.y, setMaksimal.z);
         }
     }
 

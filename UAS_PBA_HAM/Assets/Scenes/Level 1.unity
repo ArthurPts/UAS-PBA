@@ -15350,7 +15350,7 @@ GameObject:
   - component: {fileID: 381581208}
   - component: {fileID: 381581213}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: bola biasa
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35910,8 +35910,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204320469}
   m_LocalRotation: {x: 0.08975166, y: -0.1858793, z: -0.42545137, w: 0.881127}
-  m_LocalPosition: {x: 37.31, y: 2.29, z: 33.17}
-  m_LocalScale: {x: 0.37751997, y: 12.896725, z: 20.229465}
+  m_LocalPosition: {x: 36.4, y: 2.29, z: 35.24}
+  m_LocalScale: {x: 0.37751997, y: 12.896725, z: 17.802132}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1403287004}
@@ -35929,7 +35929,7 @@ GameObject:
   - component: {fileID: 1239027488}
   - component: {fileID: 1239027487}
   m_Layer: 0
-  m_Name: obor (1)
+  m_Name: obor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40850,7 +40850,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381102546}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0309dad263716e247b0feb5c9dc64c5a, type: 3}
   m_Name: 
@@ -66522,4 +66522,3 @@ MonoBehaviour:
   ParticlesBuff2: {fileID: 179462261}
   ParticlesBuff3: {fileID: 1873872615}
   isParticlePlaying: 0
-  terrain: {fileID: 1403287003}
