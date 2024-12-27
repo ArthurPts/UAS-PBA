@@ -9,9 +9,9 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-    public void goSettingsMenu()
+    public void goCreditsMenu()
     {
-        SceneManager.LoadScene("SettingsMenu");
+        SceneManager.LoadScene(4);
     }
     public void goMainMenu()
     {
@@ -20,6 +20,10 @@ public class Menu : MonoBehaviour
     public void goTutorialMenu()
     {
         SceneManager.LoadScene("TutorialMenu");
+    }
+    public void goHomeMenu()
+    {
+        SceneManager.LoadScene(0);
     }
     public void quitGame()
     {

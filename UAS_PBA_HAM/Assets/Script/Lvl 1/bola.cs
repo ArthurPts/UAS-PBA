@@ -26,12 +26,18 @@ public class bola : MonoBehaviour
             {
                 this.gameObject.tag = "Break";
             }
+            else
+            {
+                this.gameObject.tag = "Untagged";
+            }
             dataPenabrak.ParticlesBuff1.Stop();
             dataPenabrak.ParticlesBuff2.Stop();
             dataPenabrak.ParticlesBuff3.Stop();
             dataPenabrak.isParticlePlaying = false;
+            dataPenabrak.forceMagnitude = 0f;
+            
         }
-        else if(collision.gameObject.tag == "Wall")
+        else if(collision.gameObject.tag == "Wall" && this.gameObject.tag == "Break")
         {
             Destroy(this.gameObject);
         }

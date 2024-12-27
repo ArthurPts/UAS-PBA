@@ -11,6 +11,7 @@ TagManager:
   - BuffPush2
   - BuffPush3
   - Break
+  - Win
   layers:
   - Default
   - TransparentFX
