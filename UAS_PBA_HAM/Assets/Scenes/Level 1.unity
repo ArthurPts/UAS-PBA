@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &48593198 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6623227548158421799, guid: dcdfa062e2b985f408383e85d138eb6b, type: 3}
+  m_PrefabInstance: {fileID: 6623227549573377822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &121045969
 GameObject:
   m_ObjectHideFlags: 0
@@ -40773,7 +40778,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381102546}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -40836,8 +40841,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381102546}
   m_LocalRotation: {x: -0, y: -0.31636363, z: -0, w: 0.948638}
-  m_LocalPosition: {x: 36.42, y: 0.116, z: 39.94}
-  m_LocalScale: {x: 0.8171464, y: 0.11712978, z: 0.8171464}
+  m_LocalPosition: {x: 38.18, y: 0.116, z: 38.83}
+  m_LocalScale: {x: 0.6761309, y: 0.09691661, z: 0.6761309}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -40855,8 +40860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0309dad263716e247b0feb5c9dc64c5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lastTembok: {fileID: 0}
-  lastTembokBuild: {fileID: 0}
+  lastTembok: {fileID: 48593198}
+  lastTembokBuild: {fileID: 6623227548158421799, guid: dcdfa062e2b985f408383e85d138eb6b, type: 3}
 --- !u!1 &1403287001
 GameObject:
   m_ObjectHideFlags: 0
@@ -51237,7 +51242,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739686751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.45, y: 0.59, z: 39.99}
+  m_LocalPosition: {x: 27.22, y: 0.59, z: 36.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66390,7 +66395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9031586462340807973}
   m_LocalRotation: {x: -0, y: -0.05809081, z: -0, w: 0.99831134}
-  m_LocalPosition: {x: 39.87, y: 0.4100001, z: 38.28}
+  m_LocalPosition: {x: 24.24, y: 0.4100001, z: 8.37}
   m_LocalScale: {x: 0.43711832, y: 0.36818475, z: 0.48432705}
   m_ConstrainProportionsScale: 0
   m_Children:
