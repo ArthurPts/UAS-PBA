@@ -1,11 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class trap2 : MonoBehaviour
 {
-    public GameObject push;
-    public GameObject pull;
+    public GameObject duri1;
+    public GameObject duri2;
+    public GameObject duri3;
+    public GameObject duri4;
+    Boolean obj = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +25,7 @@ public class trap2 : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && obj == false)
         {
             SpawnObj();
         }
@@ -29,15 +33,11 @@ public class trap2 : MonoBehaviour
 
     public void SpawnObj()
     {
-        Vector3 SpawnPos1 = new Vector3(36f, 0.5f, 25f);
-        GameObject temp1 = (GameObject)Instantiate(push, SpawnPos1, Quaternion.identity);
-
-        temp1.GetComponent<obstacle>().force = new Vector3(-50, 0, 0);
-
-        Vector3 SpawnPos2 = new Vector3(26f, 2f, 25f);
-        GameObject temp2 = (GameObject)Instantiate(pull, SpawnPos2, Quaternion.identity);
-
-        temp2.GetComponent<obstacle>().force = new Vector3(70, 0, 0);
+        Instantiate(duri1, duri1.transform.position, Quaternion.identity);
+        Instantiate(duri2, duri2.transform.position, Quaternion.identity);
+        Instantiate(duri3, duri3.transform.position, Quaternion.identity);
+        Instantiate(duri4, duri4.transform.position, Quaternion.identity);
+        obj = true;
 
     }
 }
