@@ -130,9 +130,9 @@ public class player : MonoBehaviour
             rb.AddForce(moveDirection.normalized * speed * 0.4f, ForceMode.Impulse);
 
         }
-        //ini akan diganti
-        //transform.Rotate(transform.up * horizontalInput * rotate);
-        transform.rotation *= Quaternion.Euler(0f, horizontalInput * rotate, 0f);
+        Quaternion deltaRotation = Quaternion.Euler(0f, horizontalInput * rotate, 0f);
+        rb.MoveRotation(rb.rotation * deltaRotation);
+
     }
 
     private void SpeedControl()

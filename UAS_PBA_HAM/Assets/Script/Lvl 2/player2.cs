@@ -71,7 +71,8 @@ public class player2 : MonoBehaviour
             rb.AddForce(moveDirection.normalized * speed * 0.4f, ForceMode.VelocityChange);
 
         }
-        transform.Rotate(transform.up * horizontalInput * rotate);
+        Quaternion deltaRotation = Quaternion.Euler(0f, horizontalInput * rotate, 0f);
+        rb.MoveRotation(rb.rotation * deltaRotation);
 
     }
 
